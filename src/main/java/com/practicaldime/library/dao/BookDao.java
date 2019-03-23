@@ -29,7 +29,7 @@ public class BookDao implements BookRepository {
 
 	@Override
 	public List<Book> findAll() {
-		TypedQuery<Book> query = em.createQuery("SELECT * FROM Author c", Book.class);
+		TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b", Book.class);
 		return query.getResultList();
 	}
 
@@ -42,7 +42,7 @@ public class BookDao implements BookRepository {
 
 	@Override
 	public int update(int pages, Long id) {
-		Query query = em.createQuery("UPDATE Book SET pageCount = :pages");
+		Query query = em.createQuery("UPDATE Book SET pageCount = :pages where id = :id");
 		int updateCount = query.setParameter("pages", pages).setParameter("id", id).executeUpdate();
 		return updateCount;
 	}

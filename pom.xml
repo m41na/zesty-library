@@ -19,7 +19,7 @@
 		<jcl.version>1.7.25</jcl.version>
 		<spring.version>5.1.2.RELEASE</spring.version>
 		<jackson.version>2.9.8</jackson.version>
-		<h2.version>1.4.196</h2.version>
+		<h2.version>1.4.199</h2.version>
 		<junit.version>4.12</junit.version>
 	</properties>
 
@@ -50,12 +50,32 @@
 			<groupId>com.graphql-java</groupId>
 			<artifactId>graphql-java-tools</artifactId>
 			<version>4.3.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.datatype</groupId>
+					<artifactId>jackson-datatype-jdk8</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
 			<groupId>com.graphql-java</groupId>
 			<artifactId>graphql-java-servlet</artifactId>
 			<version>4.7.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.datatype</groupId>
+					<artifactId>jackson-datatype-jdk8</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -77,10 +97,16 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jdk8</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
 
@@ -115,7 +141,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.4.1.Final</version>
+			<version>5.4.2.Final</version>
 		</dependency>
 
 		<!-- spring context support -->

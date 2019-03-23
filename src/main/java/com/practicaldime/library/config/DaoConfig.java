@@ -78,8 +78,9 @@ public class DaoConfig {
 		props.setProperty("hibernate.dbcp.minIdle", "5");
 		// hibernate runtime
 		props.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-		props.setProperty("hibernate.hbm2ddl.auto", "update");
-		props.setProperty("hibernate.show_sql", "true");
+        props.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        props.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+        props.setProperty("hibernate.format_sql", env.getProperty("hibernate.show_sql"));
 		return props;
 	}
 }

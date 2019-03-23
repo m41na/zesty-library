@@ -1,20 +1,20 @@
 package com.practicaldime.library.resolver;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-import com.practicaldime.library.dao.AuthorRepository;
-import com.practicaldime.library.dao.BookRepository;
 import com.practicaldime.library.entity.Author;
 import com.practicaldime.library.entity.Book;
 import com.practicaldime.library.exception.BookNotFoundException;
+import com.practicaldime.library.service.LibraryService;
 
 public class Mutation implements GraphQLMutationResolver {
 
-	private BookRepository bookRepository;
-	private AuthorRepository authorRepository;
+	private LibraryService service;
 
-	public Mutation(AuthorRepository authorRepository, BookRepository bookRepository) {
-		this.authorRepository = authorRepository;
-		this.bookRepository = bookRepository;
+	public Mutation(LibraryService service) {
+		this.service = service;
 	}
 
 	public Author newAuthor(String firstName, String lastName) {
@@ -22,7 +22,7 @@ public class Mutation implements GraphQLMutationResolver {
 		author.setFirstName(firstName);
 		author.setLastName(lastName);
 
-		authorRepository.save(author);
+		service.save(author);
 
 		return author;
 	}
@@ -34,24 +34,25 @@ public class Mutation implements GraphQLMutationResolver {
 		book.setIsbn(isbn);
 		book.setPageCount(pageCount != null ? pageCount : 0);
 
-		bookRepository.save(book);
+		service.save(book);
 
 		return book;
 	}
 
 	public boolean deleteBook(Long id) {
-		bookRepository.delete(id);
+		service.deleteBook(id);
 		return true;
 	}
 	
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Book updateBookPageCount(Integer pageCount, Long id) {
-		Book book = bookRepository.findOne(id);
+		Book book = service.findBook(id);
         if(book == null) {
             throw new BookNotFoundException("The book to be updated was not found", id);
         }
         book.setPageCount(pageCount);
 
-        bookRepository.save(book);
+        service.save(book);
 
         return book;
     }

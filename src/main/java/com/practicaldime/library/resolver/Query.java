@@ -1,34 +1,31 @@
 package com.practicaldime.library.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.practicaldime.library.dao.AuthorRepository;
-import com.practicaldime.library.dao.BookRepository;
 import com.practicaldime.library.entity.Author;
 import com.practicaldime.library.entity.Book;
+import com.practicaldime.library.service.LibraryService;
 
 public class Query implements GraphQLQueryResolver {
 
-	private BookRepository bookRepository;
-	private AuthorRepository authorRepository;
+	private LibraryService service;
 
-	public Query(AuthorRepository authorRepository, BookRepository bookRepository) {
-		this.authorRepository = authorRepository;
-		this.bookRepository = bookRepository;
+	public Query(LibraryService service) {
+		this.service = service;
 	}
 
 	public Iterable<Book> findAllBooks() {
-		return bookRepository.findAll();
+		return service.listBooks();
 	}
 
 	public Iterable<Author> findAllAuthors() {
-		return authorRepository.findAll();
+		return service.listAuthors();
 	}
 
 	public long countBooks() {
-		return bookRepository.count();
+		return service.countBooks();
 	}
 
 	public long countAuthors() {
-		return authorRepository.count();
+		return service.countAuthors();
 	}
 }

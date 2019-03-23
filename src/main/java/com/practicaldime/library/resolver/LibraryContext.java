@@ -6,12 +6,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
-import com.practicaldime.library.dao.AuthorRepository;
-import com.practicaldime.library.dao.BookRepository;
 import com.practicaldime.library.entity.Book;
+import com.practicaldime.library.service.LibraryService;
 
 @Configuration
-@ComponentScan({"com.practicaldime.library.config"})
+@ComponentScan({"com.practicaldime.library.config", "com.practicaldime.library.service"})
 public class LibraryContext implements GraphQLResolver<Book> {
 	
 private AnnotationConfigApplicationContext ctx;
@@ -34,17 +33,17 @@ private AnnotationConfigApplicationContext ctx;
 	}
 	
 	@Bean
-	public BookResolver authorResolver(AuthorRepository authorRepository) {
-		return new BookResolver(authorRepository);
+	public BookResolver authorResolver(LibraryService service) {
+		return new BookResolver(service);
 	}
 
 	@Bean
-	public Query query(AuthorRepository authorRepository, BookRepository bookRepository) {
-		return new Query(authorRepository, bookRepository);
+	public Query query(LibraryService service) {
+		return new Query(service);
 	}
 
 	@Bean
-	public Mutation mutation(AuthorRepository authorRepository, BookRepository bookRepository) {
-		return new Mutation(authorRepository, bookRepository);
+	public Mutation mutation(LibraryService service) {
+		return new Mutation(service);
 	}
 }

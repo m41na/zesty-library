@@ -1,5 +1,6 @@
 package com.practicaldime.library.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,9 +21,8 @@ public class Book {
 
     private int pageCount;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id",
-            nullable = false, updatable = false)
+    @ManyToOne(cascade= {CascadeType.PERSIST } )
+    @JoinColumn(name = "author_id", nullable = false, updatable = false)
     private Author author;
 
     public Book() {

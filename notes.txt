@@ -7,6 +7,69 @@ GraphQLQueryResolver to define the operations of the root Query type.
 GraphQLMutationResolver to define the operations of the root Mutation type.
 GraphQLSubscriptionResolver to define the operations of the root Subscription type.
 
+The GraphQL type ID can be converted to the Java types String, Integer, and Long and the parameters names of the method and the schema don't have to match.
+
 start h2 server
 
-$ java -cp ~/h2-1.4.196.jar org.h2.tools.Server -tcp -tcpAllowOthers
+java -cp ~/h2-1.4.199.jar org.h2.tools.Server -tcp -tcpAllowOthers
+java -jar ~/h2-1.4.199.jar
+
+query{
+  findAllBooks{
+    id
+    title
+  }
+}
+
+mutation createAuthor($first: String!, $last: String!){
+  newAuthor(firstName: $first, lastName: $last ){
+    id
+    firstName
+    lastName
+  }
+}
+
+variables: {"first": "Steve", "last": "Mike"}
+
+query{
+  findAllAuthors{
+    id
+    firstName
+  }
+}
+
+query{
+  countAuthors
+}
+
+mutation createBook($title: String!, $isbn: String!, $pages: Int, $author: ID!){
+  newBook(title: $title, isbn: $isbn, pageCount: $pages, author: $author ){
+    id
+    title
+    isbn
+    pageCount
+    author{
+      firstName
+      lastName
+    }
+  }
+}
+
+variables: {"title": "The little hill", "isbn": "123456", "pageCount": 50, "author": 1}
+
+query{
+  findAllBooks{
+    id
+    title
+    isbn
+    pageCount
+    author{
+      firstName
+      lastName
+    }
+  }
+}
+
+query{
+  countBooks
+}

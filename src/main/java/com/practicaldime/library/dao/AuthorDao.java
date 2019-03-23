@@ -28,13 +28,13 @@ public class AuthorDao implements AuthorRepository {
 
 	@Override
 	public List<Author> findAll() {
-		TypedQuery<Author> query = em.createQuery("SELECT * FROM Author c", Author.class);
+		TypedQuery<Author> query = em.createQuery("SELECT a FROM Author a", Author.class);
 		return query.getResultList();
 	}
 
 	@Override
 	public Long count() {
-		TypedQuery<Long> query = em.createQuery("SELECT count(*) FROM Author c", Long.class);
+		TypedQuery<Long> query = em.createQuery("SELECT count(*) FROM Author a", Long.class);
 		return query.getSingleResult();
 	}
 }
