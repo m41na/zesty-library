@@ -6,9 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
+import com.practicaldime.library.service.LibraryEndpoint;
 import com.practicaldime.zesty.app.AppServer;
-import com.practicaldime.zesty.servlet.HandlerRequest;
-import com.practicaldime.zesty.servlet.HandlerResponse;
 
 public class App {
 	
@@ -19,16 +18,13 @@ public class App {
 		String host = "localhost";
 		
 		Map<String, String> props = Maps.newHashMap();
-		props.put("appctx", "/ws");
+		props.put("appctx", "/");
 		props.put("assets", "www/chat");
 		props.put("cors", "true");
 
 		AppServer router = new AppServer(props).router();
-		router.websocket("/chat/*", ()-> new Chat("chat"))
-		.get("/check", "", "application/json", null, (HandlerRequest request, HandlerResponse response) -> {
-			response.send(String.format("incoming request: '%s'", request.getRequestURI()));
-			return null;
-		})
+		//router.websocket("/chat/*", ()-> new Chat("chat"))
+		router.servlet("/graphql", null, LibraryEndpoint.create())
 		.listen(port, host, (msg) -> {
 			LOG.info(msg);
 		});		

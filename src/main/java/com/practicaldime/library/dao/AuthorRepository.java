@@ -1,9 +1,16 @@
 package com.practicaldime.library.dao;
 
+import java.util.List;
+
 import com.practicaldime.library.entity.Author;
 
-public interface AuthorRepository extends CrudRepository<Author, Long> {
+public interface AuthorRepository {
 
-	Author findOne(Long id); 
+	void save(Author author);
 	
+	Author findOne(Long id);
+
+	List<Author> findAll();
+	
+	Long count();
 }

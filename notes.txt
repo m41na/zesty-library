@@ -7,3 +7,6 @@ GraphQLQueryResolver to define the operations of the root Query type.
 GraphQLMutationResolver to define the operations of the root Mutation type.
 GraphQLSubscriptionResolver to define the operations of the root Subscription type.
 
+start h2 server
+
+$ java -cp ~/h2-1.4.196.jar org.h2.tools.Server -tcp -tcpAllowOthers
