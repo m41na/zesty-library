@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.practicaldime</groupId>
-	<artifactId>zesty-library</artifactId>
+	<groupId>zesty-bookstore</groupId>
+	<artifactId>zesty-bookstore</artifactId>
 	<version>0.1</version>
 	<packaging>jar</packaging>
 
@@ -30,15 +30,7 @@
 			<artifactId>zesty-router</artifactId>
 			<version>0.1.0</version>
 		</dependency>
-
-		<!-- graphql -->
-		<dependency>
-			<groupId>com.graphql-java</groupId>
-			<artifactId>graphql-java</artifactId>
-			<version>11.0</version>
-		</dependency>
-
-		<!-- spring context support -->
+	
 		<!-- graphql -->
 		<dependency>
 			<groupId>com.graphql-java</groupId>
