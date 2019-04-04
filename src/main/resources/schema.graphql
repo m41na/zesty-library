@@ -1,68 +1,68 @@
+scalar SimpleDateScalar
+
 schema {
     query: Query
 }
 
 type Query {
-	countries: [Country]!
-	country(name: String!): Country
+	listQuestions(filter: QueFilter): [Question]!
+	findAllProfiles: [Profile]!
+	findAllLocations: [Location]
+	countQuestions(id: Long!): Int!
+	countProfiles: Long!
 }
 
-type Country {
-    name: String!,
-    topLevelDomain: [String]!,
-    alpha2Code: String!,
-    alpha3Code: String!,
-    callingCodes: [String]!,
-    capital: String!,
-    altSpellings: [String]!,
-    region: String!,
-    subregion: String!,
-    population: Long!,
-    latlng: [Float]!,
-    demonym: String!,
-    area: Float!,
-    gini: Float!,
-    timezones: [String]!,
-    borders: [String]!,
-    nativeName: String!,
-    numericCode: String!,
-    currencies: [Currency]!,
-    languages: [Language]!,
-    translations: Translations!,
-    flag: String!,
-    regionalBlocs: [RegionalBlock]!,
-    cioc: String!
+type Mutation {
+  newProfile(email: String!, firstName: String!, lastName: String!): Profile!
+  newQuestion(content: String!, answer: String!, authorId: Long!): Question!
+  deleteQuestion(id: ID!): Int!
+  updateQuestion(que: QueInput!): Question!
 }
 
-type Currency {
-    code: String!,
-    name: String!,
-    symbol: String!
+type Question {
+    id: ID!
+    content: String!
+    createdBy: Profile!
+    answer: Answer
 }
 
-type Language {
-	iso639_1: String!,
-    iso639_2: String!,
-    name: String!,
-    nativeName: String!
+type Profile {
+	id: ID!
+	firstName: String!
+	lastName: String
+	email: String!
 }
 
-type Translations {
-	de: String!,
-    es: String!,
-    fr: String!,
-    ja: String!,
-    it: String!,
-    br: String!,
-    pt: String!,
-    nl: String!,
-    hr: String!,
-    fa: String!
+type Answer {
+	id: ID!
+	content: String!
+	reason: String
+	reference: String
+	points: Int
 }
 
-type RegionalBlock {
-    acronym: String!,
-    name: String!,
-    otherAcronyms: [String],
-    otherNames: [String]
+type Author {
+  id: ID!
+  firstName: String!
+  lastName: String!
+}
+
+type Location {
+	id: ID!
+	city: String
+	state: String
+	zip: String
+	country: String
+}
+
+input QueInput{
+	content: String
+    answer: String
+}
+
+input QueFilter{
+	authorId: ID
+	start: Int
+	limit: Int
+	content: String
 }

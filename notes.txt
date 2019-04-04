@@ -14,62 +14,47 @@ start h2 server
 java -cp ~/h2-1.4.199.jar org.h2.tools.Server -tcp -tcpAllowOthers
 java -jar ~/h2-1.4.199.jar
 
-query{
-  findAllBooks{
-    id
-    title
-  }
-}
-
-mutation createAuthor($first: String!, $last: String!){
-  newAuthor(firstName: $first, lastName: $last ){
+mutation createProfile{
+  newProfile(lastName: "Maina", firstName: "Steve", email: "steve.maina@email.com"){
     id
     firstName
     lastName
   }
 }
 
-variables: {"first": "Steve", "last": "Mike"}
-
-query{
-  findAllAuthors{
+query {
+  findAllProfiles{
     id
     firstName
+    lastName
   }
 }
 
-query{
-  countAuthors
-}
-
-mutation createBook($title: String!, $isbn: String!, $pages: Int, $author: ID!){
-  newBook(title: $title, isbn: $isbn, pageCount: $pages, author: $author ){
+mutation createQuestion{
+  newQuestion(content: "1+1", authorId: 8, answer: "2"){
     id
-    title
-    isbn
-    pageCount
-    author{
+    content
+    createdBy{
       firstName
-      lastName
     }
-  }
-}
-
-variables: {"title": "The little hill", "isbn": "123456", "pageCount": 50, "author": 1}
-
-query{
-  findAllBooks{
-    id
-    title
-    isbn
-    pageCount
-    author{
-      firstName
-      lastName
+    answer{
+      id
+      content
     }
   }
 }
 
 query{
-  countBooks
+  listQuestions(filter: { authorId: 8} ){
+    content
+    createdBy{
+      id
+      firstName
+    }
+    answer{
+      id
+      content
+    }
+  }
 }
+
