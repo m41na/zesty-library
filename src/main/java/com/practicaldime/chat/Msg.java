@@ -4,11 +4,10 @@ import com.practicaldime.zesty.websock.AppWsMessage;
 
 public class Msg extends AppWsMessage {
 
+	public final int status;
+	
 	public Msg(String from, String to, String time, String error, int status) {
-		super(from, to, time, error, status);
-	}
-
-	public Msg(String from, String to, String time, String message) {
-		super(from, to, time, message);
+		super(from, to, time, error);
+		this.status = status;
 	}
 }

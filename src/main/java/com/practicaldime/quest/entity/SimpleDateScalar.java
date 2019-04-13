@@ -18,7 +18,7 @@ public class SimpleDateScalar extends GraphQLScalarType {
 	private static SimpleDateFormat yyyyddmm = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
 	public SimpleDateScalar() {
-		super("DateTime", "A Simple DateTime Scalar", new Coercing<Date, String>() {
+		super("SimpleDateScalar", "A Simple Date/Time Scalar", new Coercing<Date, String>() {
 			@Override
 			public String serialize(Object input) throws CoercingSerializeException {
 				Date date;

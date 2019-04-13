@@ -62,6 +62,8 @@ input QueInput{
 
 input QueFilter{
 	authorId: ID
+	from: SimpleDateScalar
+	until: SimpleDateScalar
 	start: Int
 	limit: Int
 	content: String

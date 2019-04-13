@@ -2,18 +2,31 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WebsSockets</title>
-    <link rel="stylesheet" href="style.css">
+    <title>SimpleSock</title>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
 </head>
 <body>
-	<div class="chatUser">
-		<input name="user" value="steve"/>
-	</div>
-    <div id="chatControls">
-    <input id="message" placeholder="Type your message">
-    <button id="send">Send</button>
+    <div id="chatWidget">
+        <div id="chatUser">
+            <input name="user" value="steve"/>
+        </div>
+        <div id="chatMessage">
+            <div class="conversation">
+                <div class="message-row incoming">
+                    <div class="from"><span class="sender"></span> <span class="time"></span></div>
+                    <div class="content"></div>
+                </div>
+                <div class="message-row outgoing">
+                    <div class="from"><span class="sender"></span> <span class="time"></span></div>
+                    <div class="content"></div>
+                </div>
+            </div>
+            <textarea name="message" placeholder="Type your message" cols="10"></textarea>
+        </div>
+        <div id="chatButton">
+            <button id="send">Send</button>
+        </div>    
     </div>
-    <div id="chat">    <!-- Built by JS --> </div>
     
     <template id="chatmessage">
     	<div class="message-row">
@@ -22,6 +35,6 @@
     	</div>
     </template>
     
-    <script src="wsocket.js"></script>
+    <!-- <script src="wsocket.js"></script> -->
 </body>
 </html>
