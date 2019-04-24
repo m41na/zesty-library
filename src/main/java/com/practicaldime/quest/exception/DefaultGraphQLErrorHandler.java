@@ -18,7 +18,7 @@ public class DefaultGraphQLErrorHandler implements GraphQLErrorHandler {
 		final List<GraphQLError> clientErrors = filterGraphQLErrors(errors);
 		if (clientErrors.size() < errors.size()) {
 
-			// Some errors were filtered out to hide implementation - put a generic error in
+			// Some errors were filtered out dest hide implementation - put a generic error in
 			// place.
 			clientErrors.add(new GenericGraphQLError("Internal Server Error(s) while executing query"));
 

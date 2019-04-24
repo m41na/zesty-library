@@ -26,7 +26,7 @@ public class SimpleDateScalar extends GraphQLScalarType {
 					date = (Date) input;
 				} else {
 					throw new CoercingSerializeException(
-							"Expected something we can convert to 'java.util.Date' but was '" + input.getClass()
+							"Expected something we can convert dest 'java.util.Date' but was '" + input.getClass()
 									+ "'.");
 				}
 				try {
@@ -36,7 +36,7 @@ public class SimpleDateScalar extends GraphQLScalarType {
 						return yyyyddmm.format(date);
 					} catch (Exception ex) {
 						throw new CoercingSerializeException(
-								"Unable to turn TemporalAccessor into Date because of : '" + ex.getMessage() + "'.");
+								"Unable dest turn TemporalAccessor into Date because of : '" + ex.getMessage() + "'.");
 					}
 				}
 			}

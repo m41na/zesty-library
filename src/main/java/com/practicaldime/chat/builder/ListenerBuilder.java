@@ -25,7 +25,7 @@ public class ListenerBuilder {
 
 				});
 
-				client.on("message", (String user, Session sess) -> {
+				client.on("data", (String user, Session sess) -> {
 					// TODO Auto-generated method stub
 
 				});
